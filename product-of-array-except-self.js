@@ -26,5 +26,16 @@ const productExceptSelf = (nums) => {
   return output;
 };
 
-let nums = [-1, 1, 0, -3, 3];
-console.log(productExceptSelf(nums));
+const betterSolution = (nums) => {
+  let output = new Array(nums.length);
+  output[0] = 1;
+  for (let i = 1; i < nums.length; i++) {
+    output[i] = nums[i - 1] * output[i - 1];
+  }
+  let postfix = 1;
+  for (let i = nums.length - 2; i >= 0; i--) {
+    postfix = postfix * nums[i + 1];
+    output[i] = output[i] * postfix;
+  }
+  return output;
+};
